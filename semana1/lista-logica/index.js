@@ -71,7 +71,7 @@ function retornaStringEmMaiuscula(string) {
 
 // EXERCÍCIO 07
 function calculaIngressosEspetaculo(custo, valorIngresso) {
-    return custo/valor
+    return custo/valorIngresso
 
 }
 
@@ -114,19 +114,17 @@ function checaIgualdadeDesconsiderandoCase(string1, string2) {
 function checaRenovacaoRG() {
  const anoAtual2 = Number(prompt('Qual o ano atual?'))
  const anoNascimento2 = Number(prompt('Qual o seu ano de nascimento?'))
- const anoEmissaoCarteira = prompt('Qual o ano de emissão da sua identidade?')
+ const anoEmissaoCarteira = Number(prompt('Qual o ano de emissão da sua identidade?'))
   
  const idade = anoAtual2 - anoNascimento2
- const carteiraDeIdentidade = anoAtual - carteiraDeIdentidade
+ const carteiraDeIdentidade = anoAtual - anoEmissaoCarteira
   
- const renovar = (idade <= 20) && (carteiraDeIdentidade = 5) || (idade >= 20) && (idade <50) ||
-(idade =50) && (carteiraDeIdentidade = 10) || (idade > 50) && (carteiraDeIdentidade = 15 )
+ const cond1= idade <= 20 && carteiraDeIdentidade >= 5 
+ const cond2 = idade > 20 && idade <=50 && carteiraDeIdentidade >=10
+ const cond3 = idade > 50 && carteiraDeIdentidade >= 15 )
 
+ console.log(cond1 || cond2 || cond3)
 
- 
- 
- console.log(renovar)
- 
 }
 
 // EXERCÍCIO 14
@@ -144,8 +142,7 @@ function checaValidadeInscricaoLabenu() {
   const maiorDeDezoito = prompt("Você tem mais de 18 anos?")
   const ensinoMedio = prompt("Você possui ensino médio completo?")
   const disponibilidade = prompt("Você possui disponibilidade exclusiva durante os horários do curso?")
-  
-  
-  const requisitos = maiorDeDezoito && ensinoMedio && disponibilidade
-  
-  console.log(requisitos)
+   
+  console.log(maiorDeDezoito === "sim" && ensinoMedio === "sim" && disponibilidade === "sim")
+
+}
