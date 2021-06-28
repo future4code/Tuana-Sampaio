@@ -6,12 +6,19 @@ function inverteArray(array) {
 
 // EXERCÍCIO 02
 function retornaNumerosParesElevadosADois(array) {
+      arrayNumerosPares = array.filter((elemento)=> elemento % 2 === 0)
+      return arrayNumerosPares.map((elemento) => elemento*elemento) 
+         
+} 
+ 
+    
 
-}
 
 // EXERCÍCIO 03
 function retornaNumerosPares(array) {
-
+    novoArray2 = array.filter((elemento)=> elemento % 2 === 0)
+    return novoArray2
+  
 }
 
 // EXERCÍCIO 04
@@ -21,7 +28,7 @@ function retornaMaiorNumero(array) {
 
 // EXERCÍCIO 05
 function retornaQuantidadeElementos(array) {
-  
+  return array.length
 }
 
 // EXERCÍCIO 06
