@@ -13,7 +13,6 @@ function retornaNumerosParesElevadosADois(array) {
  
     
 
-
 // EXERCÍCIO 03
 function retornaNumerosPares(array) {
     novoArray2 = array.filter((elemento)=> elemento % 2 === 0)
@@ -23,8 +22,15 @@ function retornaNumerosPares(array) {
 
 // EXERCÍCIO 04
 function retornaMaiorNumero(array) {
-
+  let maiorNumero = 0
+    for( let i = 0; i < array.length; i++){
+    const numero = array[i]
+    if(numero > maiorNumero){
+      maiorNumero = numero
+    }
+  } return maiorNumero
 }
+
 
 // EXERCÍCIO 05
 function retornaQuantidadeElementos(array) {
@@ -33,30 +39,69 @@ function retornaQuantidadeElementos(array) {
 
 // EXERCÍCIO 06
 function retornaExpressoesBooleanas() {
+  const booleano1 = true
+  const booleano2 = false
+  const booleano3 = !booleano2 
+  const booleano4 = !booleano3 
+  
+  const arrayRespostas = []
+
+  arrayRespostas[0] = booleano1 && booleano2 && !booleano4
+  arrayRespostas[1] = (booleano1 && booleano2) || !booleano3
+  arrayRespostas[2] = (booleano2 || booleano3) && (booleano4 || booleano1)
+  arrayRespostas[3] = !(booleano2 && booleano3) || !(booleano1 && booleano3)
+  arrayRespostas[4] = !(booleano1) && !(booleano3) || (!booleano4 && booleano3 && booleano3)
+  
+     return arrayRespostas
+    
 
 }
 
+
 // EXERCÍCIO 07
 function retornaNNumerosPares(n) {
-
+  
+  let elemento = [] 
+  for(let i = 0; i < n; i++){
+    elemento.push(i*2)
+  }
+  
+  return elemento
+  
 }
 
 // EXERCÍCIO 08
 function checaTriangulo(a, b, c) {
-  // return 'Escaleno'
-  // return 'Equilátero'
-  // return 'Isósceles'
-}
+  if(a=== b && b === c && c === a){
+    return 'Equilátero'
+  } else if(a===b || b===c || a === c){
+    return 'Isósceles'
+  } else{
+      return 'Escaleno'
+    }
+  }
+  
+
 
 // EXERCÍCIO 09
 function comparaDoisNumeros(num1, num2) {
+    // let maiorNumero = num1<num2 
+    // let maiorDivisivelPorMenor = num2/num1
+    // let diferenca = num2-num1
+    // return {
+    //   maiorNumero: " ",
+    //   maiorDivisivelPorMenor: " ",
+    //   diferenca: " "
+    }
+
+    
   // Formato do objeto a ser retornado:
   // {
   //   maiorNumero: X,
   //   maiorDivisivelPorMenor: Y,
   //   diferenca: Z
   // }
-}
+
 
 // EXERCÍCIO 10
 function segundoMaiorEMenor(array) {
@@ -136,4 +181,4 @@ function ordenaPorData(consultasData) {
 // EXERCÍCIO 20
 function calculaSaldo(contas) {
 
-}
+} 
