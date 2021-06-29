@@ -107,33 +107,26 @@ function comparaDoisNumeros(num1, num2) {
           diferenca: diferenca
         }
       
-  // let maiorNumero = num1<num2 
-    // let maiorDivisivelPorMenor = num2/num1
-    // let diferenca = num2-num1
-    // return {
-    //   maiorNumero: " ",
-    //   maiorDivisivelPorMenor: " ",
-    //   diferenca: " "
-    }
-
-    
-  // Formato do objeto a ser retornado:
-  // {
-  //   maiorNumero: X,
-  //   maiorDivisivelPorMenor: Y,
-  //   diferenca: Z
-  // }
+      
+      // Formato do objeto a ser retornado:
+      // {
+      //   maiorNumero: X,
+      //   maiorDivisivelPorMenor: Y,
+      //   diferenca: Z
+      // }  
 
 
 // EXERCÍCIO 10
 function segundoMaiorEMenor(array) {
-
+  const segundoMaior
+  const segundoMenor
+  const novoArray3 = array.filter
+  for each i in 0 to length( array ) - 2 
 }
 
 // EXERCÍCIO 11
 function ordenaArray(array) {
-
-}
+  array.forEach(ordenaArray)
 
 // EXERCÍCIO 12
 function filmeFavorito() {
