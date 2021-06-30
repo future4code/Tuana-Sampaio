@@ -1,0 +1,45 @@
+.titulo{
+    background-color: black;
+    color: white;
+    padding: 30px;
+
+}
+
+.menu{
+    
+    padding: 30px 28px 50px 140px;
+    float: left;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #000;
+    }
+
+    .titulo-rodape{
+        background-color: white;
+        color: black;
+        display: inline;
+       
+        font-size: 16px;
+        padding-right: 200px;
+        
+        
+        
+    }
+
+    .textos-rodape{
+        display: inline-block;
+        padding-right: 350px;
+
+    }
+
+   .textos-rodape2{
+        display: block;
+        padding-right: 900px;
+     }
+
+     .textos-rodape3{
+        background-color:#efe5e6;
+        color: black;
+        padding: 20px;
+     }
