@@ -1,0 +1,181 @@
+/** 
+  *
+  *  ESTILOS GERAIS 
+  *
+  **/
+
+* {
+    margin: 0;
+    padding: 0;
+    
+    
+        
+}
+
+h2 {
+    background-color: #fe7e02;
+    padding: 10px 5px 10px 5px;
+    color: white;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+input {
+    height: 20px;
+    width: 500px;
+}
+
+button:focus {
+    color: white;
+}
+
+img {
+    width: 50px;
+}
+
+div>p:first-child {
+    display: block;
+
+}
+
+div img {
+    width: 50px;
+}
+
+
+.botao-amarelo {
+    background-color: #ffaf43;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    
+   
+}
+
+.botao-amarelo:hover {
+    background-color: #c44f00;
+    margin-top: auto;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    height: 500px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    
+    
+    
+    
+    
+    
+}
+
+.icone {
+    
+    width: 30px;
+}
+
+
+/** 
+  *
+  *  ESTILOS HOME 
+  *
+  **/
+
+#container-de-descricao {
+    background-color: #2274a5;
+    color: white;
+    padding: 70px;
+    font-family: 'Roboto', sans-serif;
+    
+    
+    
+}
+
+#container-de-descricao>ol {
+    padding: 15px 15px;
+    font-family: 'Roboto', sans-serif;
+    
+    
+}
+
+#container-para-comprar {
+    background-color: #e7eb90;
+    font-family: 'Roboto', sans-serif;
+    
+    
+    
+}
+
+#container-para-comprar>p {
+    color: #c44f00;
+    padding: 100px 0;
+    font-size: 60px;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+
+/**
+  *
+  *  ESTILOS COMPRAR 
+  *
+  **/
+
+div:nth-child(2),
+div:last-child { 
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    
+}
+table {
+    padding-left: 30%;
+    width: 70%;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+td button {
+    background-color: #fadf63;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    color: black;
+}
+td button:hover {
+    cursor: pointer;
+    background-color: #635a3d
+    
+}
+
+.container-do-search {
+    margin-top: 20px;
+    height: 100px;
+}
+
+
+#back-button {
+    cursor: pointer;
+    background-color: white;
+    width: 100px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 10px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+}
+
+#back-button:hover {
+    background-color: #635a3d
+    
+}
+
+#back-button:active{
+    background-color: purple;
+}
