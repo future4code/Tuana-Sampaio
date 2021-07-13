@@ -21,7 +21,7 @@ const SmallCard = styled.img `
     border-radius: 50%;
 `;
 
- const titulo = styled.h4 ` 
+ const Titulo = styled.h4 ` 
     margin-bottom: 15px;
 `;
 
@@ -37,11 +37,11 @@ function cardPequeno(props) {
         <Container className="smallCard">
             <SmallCard src={ props.imagem2 } />
             <CardPequeno>
-                <titulo>{ props.email }</titulo>
+                <Titulo>{ props.email }</Titulo>
                 <p>{ props.endereco }</p>
             </CardPequeno>
         </Container>
     )
 }
 
-export default CardPequeno;
+export default cardPequeno;
