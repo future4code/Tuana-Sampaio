@@ -48,30 +48,22 @@ class Post extends React.Component {
     numeroComentarios: 0
   }
 
-  gurdaComentando = (event) => {
-    this.setState({ comentando: event.target.value });
-    console.log(event.target.value);
-  };
-
-
+  
   onClickCurtida = () => {
     this.setState({
-
-      curtido: true,
-      numeroCurtidas: this.state.numeroCurtidas + 1
-    })
-    console.log('Curtiu!')
-  }
-
-  onClickDescurtida = () => {
-    this.setState({
-
-      curtido: false,
-      numeroCurtidas: this.state.numeroCurtidas - 1
-    })
+      
+      curtido: !this.state.curtido,
+      numeroCurtidas: this.state.curtido
+      ? this.state.numeroCurtidas - 1
+      : this.state.numeroCurtidas + 1,
+    });
     
   }
 
+  
+
+
+  
 
 
   onClickComentario = () => {
@@ -122,14 +114,7 @@ class Post extends React.Component {
           valorContador={this.state.numeroCurtidas}
         />
 
-        <IconeComContador
-          icone={iconeCurtida}
-          onClickIcone={this.onClickDescurtida}
-          valorContador={this.state.numeroCurtidas}
-        />
-
-
-
+       
         <IconeComContador
           icone={iconeComentario}
           onClickIcone={this.onClickComentario}
