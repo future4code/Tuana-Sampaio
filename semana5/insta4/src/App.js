@@ -9,8 +9,10 @@ const MainContainer = styled.div`
   align-items: center;
 `
 
-const Foemulario = styled.div`
-  border: 1px solid black;
+const Formulario = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 20px solid black;
   margin: 16px;
   padding: 16px;
 
@@ -91,27 +93,27 @@ onChangeInputFotoPost = (event) =>{
           fotoPost={'https://cdn.pixabay.com/photo/2015/05/26/04/20/landscape-784200_960_720.jpg'}
         />
 
-        <div>
+        <formulario>
 
-        <input
+        <div
          value = {this.state.valorInputNomeUsuario}
          onChange ={ this.onChangeInputNomeUsuario}
          placeholder = {"Nome"}
         />
 
-        <input
+        <div
            value = {this.state.valorInputFotoUsuario}
            onChange ={ this.onChangeInputFotoUsuario}
            placeholder = {"Foto usuário"}
         />
 
-        <input
+        <div
            value = {this.state.valorInputFotoPost}
            onChange ={ this.onChangeInputFotoPost}
            placeholder = {"Foto post"}
         />
 
-        </div>
+        </formulario>
         <button onClick = {this.adicionaPost} > Adicionar</button>
 
         <div>{listaDeComponentes}</div>
