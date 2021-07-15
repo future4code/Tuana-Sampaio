@@ -95,19 +95,19 @@ onChangeInputFotoPost = (event) =>{
 
         <formulario>
 
-        <div
+        <input
          value = {this.state.valorInputNomeUsuario}
          onChange ={ this.onChangeInputNomeUsuario}
          placeholder = {"Nome"}
         />
 
-        <div
+        <input
            value = {this.state.valorInputFotoUsuario}
            onChange ={ this.onChangeInputFotoUsuario}
            placeholder = {"Foto usuário"}
         />
 
-        <div
+        <input
            value = {this.state.valorInputFotoPost}
            onChange ={ this.onChangeInputFotoPost}
            placeholder = {"Foto post"}
