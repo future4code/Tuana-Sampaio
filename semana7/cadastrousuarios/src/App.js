@@ -36,7 +36,7 @@ const urlDelete = " https://us-central1-labenu-apis.cloudfunctions.net/labenuser
     componentDidMount() {
       this.createUsers()
       this.getAllUsers() //Faz esta função funcionar. Primeiro monta o componente na tela(carrega a tela) e depois executa essa função e salva no estado. 
-      /*this.deleteUsers()*/
+      this.deleteUsers()
     }
     //usa-se arrow function para resolver o this.setstate, sem ela dá problema.
   getAllUsers = () => {
@@ -72,17 +72,17 @@ const urlDelete = " https://us-central1-labenu-apis.cloudfunctions.net/labenuser
     })
   }
  
-  /*deleteUsers = () => {
-    axios.delete(urlDelete, {
-      params: { id}} , headers)
+  deleteUsers = (id) => {
+    axios.delete(`${urlDelete}/${id}`, headers)
     .then((res)=>{
         alert("Usuário removido com sucesso")
+        
         
     })
     .catch((err)=>{
       alert(err.response.data.message)
     })
-  }*/
+  }
   
   onChangeUserName = (event) => {
     this.setState( {inputNameValue: event.target.value})
@@ -96,11 +96,22 @@ const urlDelete = " https://us-central1-labenu-apis.cloudfunctions.net/labenuser
 
   render(){
     const usersList = this.state.arrayUsuariosCadastrados.map((elemento) => {
-      return <li key = {elemento.id}> {elemento.name} </li>
+      return <div>   
+        <li key = {elemento.id} > {elemento.name} </li>
+        <button onClick = {() => this.deleteUsers (elemento.id) }>Remover</button></div>
+      
     })
-    console.log(this.state.arrayUsuariosCadastrados)
+    //console.log(this.state.arrayUsuariosCadastrados)
+    console.log(usersList)
     
-    return(
+    //const usersIdList = this.state.arrayUsuariosCadastrados.map((elemento) => {
+      //return <li> {elemento.id} </li>
+    //})
+    //console.log(usersIdList)
+
+
+    return (
+
       <CaixaCadastro>
         <h4>Nome:</h4>
         <input 
@@ -121,7 +132,7 @@ const urlDelete = " https://us-central1-labenu-apis.cloudfunctions.net/labenuser
         <div>
           <h3>Lista de Usuários cadastrados:</h3>
           {usersList} 
-          <button /*onClick = {this.deleteUsers}*/>Remover</button>
+          
         </div>
        
       </CaixaCadastro>
