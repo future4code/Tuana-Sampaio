@@ -67,7 +67,7 @@ export default function Perfil(props){
          }
 
         axios
-        .post(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/tuana/choose-person`, body)
+        .post(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/${id} /choose-person`, body)
         .then((res)=>{
             console.log(res.data)
             setChoice(res.data)
