@@ -6,6 +6,7 @@ const HeaderContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-left: 37%;
+    
 `
  
 
@@ -16,7 +17,7 @@ function Header(props) {
       <HeaderContainer>
         
              <h1>ASTROMATCH</h1>
-             <button onClick = {props.mudaTela}> Mudar para tela match</button>
+             
         
       </HeaderContainer>
     );

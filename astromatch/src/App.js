@@ -2,7 +2,7 @@
 import Perfil from "./components/Perfil/Perfil";
 import styled from "styled-components";
 import Header from "./components/Header/Header";
-import TelaMatch from "./components/TelaMatchs/TelaMatchs";
+import TelaMatches from "./components/TelaMatches/TelaMatches";
 import React, { useState } from 'react'
 
 
@@ -19,32 +19,63 @@ const TelaInicialContainer = styled.div`
    border-radius: 50px;
 
 `
-const ButtonsContainer = styled.div`
+
+
+const ButtonListaMacthes = styled.li`
   display: flex;
-  justify-content: center;
-  
-  
+  justify-content: flex-end;
+`
+
+const ButtonPerfil = styled.li`
+  display: flex;
+  justify-content: flex-end;
 `
 
  function App() {
-    
+   const [tela, setTela] = useState("TelaMacthes")
+    const  [listaMatches, setListaMatches] = useState([])
+
+   const mudaTela = (event) => {
+     if(event.target.innerHTML === "TelaMacthes"){
+       setTela("TelaMatches")
+     }else{
+       setTela("Perfil")
+     }
+   }
+   //funcão de adicionar à lista de matches
+   const addPerfil = (perfil) => {
+    const newListaMatches = [...listaMatches, perfil]
+    setListaMatches(newListaMatches)
+    alert("perfil adicionado ")
+   }
+
+   
+   
   //fazer a função de renderizar as telas e enviar por props para o header usar no botao
-  
+  const renderizarTela = () => {
+    if(tela === "TelaMatches"){
+      return <TelaMatches addPerfil = {addPerfil}/>
+    }else{
+      return <Perfil addPerfil = {addPerfil} />
+    }
+  }
+
+
+
   return (
     //Passar por props para o componente Perfil a imagem, nome e descrição do usuário.
     <TelaInicialContainer>
-      
+
       <Header
       />
-      <Perfil
-      imagemUsuario = {"https://blog.unyleya.edu.br/wp-content/uploads/2017/12/saiba-como-a-educacao-ajuda-voce-a-ser-uma-pessoa-melhor.jpeg"}
-      nome = {"Ana"}
-      descricao = {"descrição usuário"}    
-      />
-      <ButtonsContainer>
-        <button>X</button>
-        <button>♥️</button>
-      </ButtonsContainer>
+
+      <ButtonListaMacthes onClick={mudaTela}>TelaMacthes</ButtonListaMacthes>
+      <ButtonPerfil onClick={mudaTela}>Perfil</ButtonPerfil>
+      
+     
+       
+      
+      {renderizarTela()}
     </TelaInicialContainer>
   );
 }
