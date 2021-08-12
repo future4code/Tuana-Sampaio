@@ -33,8 +33,8 @@ const ButtonPerfil = styled.li`
 
  function App() {
    const [tela, setTela] = useState("TelaMacthes")
-    const  [listaMatches, setListaMatches] = useState([])
-
+    const [listaMatches, setListaMatches] = useState([])
+  
    const mudaTela = (event) => {
      if(event.target.innerHTML === "TelaMacthes"){
        setTela("TelaMatches")
@@ -46,6 +46,7 @@ const ButtonPerfil = styled.li`
    const addPerfil = (perfil) => {
     const newListaMatches = [...listaMatches, perfil]
     setListaMatches(newListaMatches)
+    console.log(listaMatches)
     alert("perfil adicionado ")
    }
 

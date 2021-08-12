@@ -18,9 +18,9 @@ function Header(props) {
         
              <h1>ASTROMATCH</h1>
              
-        
+             
       </HeaderContainer>
     );
   }
-  
+  //<button onClick = {() => props.mudaTela("TelaMatches")} >Matches</button>
   export default Header;

@@ -29,34 +29,35 @@ const ButtonsContainer = styled.div`
 export default function Perfil(props){
     //vou ter q ter um estado para armazenar os perfis na api get profile to choose
     const [profile, setProfile] = useState({})
-    //const [profileId, setProfileId] = useState("true")
-    
+    const [choice, setChoice] = useState("false")
+    const [clear, setClear] = useState("")
     //bater na API e buscar os perfis 
     
     useEffect(() => {
         getProfileToChoose();
       }, []);//DidMount renderiza na tela o perfil assim que o componente é montado.
         
-      
+      // Bate na API e pega todos os perfis:
     const getProfileToChoose = (user) => {
         axios
         .get(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/${user} /person`)
         .then((res)=>{
          //console.log(res.data.profile)
          setProfile(res.data.profile)
-         choosePerson()
+        
        }).catch((err)=>{
            console.log(err.response)
        })
     }
 
+    useEffect(() => {
+        choosePerson();
+      }, []); 
     
-
-   
-
-    const choosePerson = (person) => {
+    //Função para escolher um perfil
+    const choosePerson = (id) => {
         const body = {
-            id: " ",
+            id: profile.id,
 	        choice: false
         }
         const headers = {
@@ -66,15 +67,45 @@ export default function Perfil(props){
          }
 
         axios
-        .post(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/${person} /choose-person`, body, headers)
+        .post(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/tuana/choose-person`, body)
         .then((res)=>{
             console.log(res.data)
-            
+            setChoice(res.data)
+           addMatchProfile()
         }).catch((err)=>{
             console.log(err.response)
         })
     }
 
+
+            const addMatchProfile = () => {
+            if(choice === "true"){
+                setChoice("true")
+            }else{
+                clearPerson()
+            }
+        } 
+   
+        useEffect(() => {
+            clearPerson();
+          }, []);    
+
+   const clearPerson = () => {
+    const headers = {
+        headers: {
+            ContentType: "application/json"
+        }
+     }
+    axios
+    .put(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/tuana/clear`, headers)
+    .then((res)=>{
+        console.log(res.data)
+        setClear(res.data)
+
+    }).catch((err)=>{
+        console.log(err.response)
+    })
+}
    
     // retornar os dados que eu quero imagem,nome e descrição
     //renderizar os perfis com map
@@ -91,8 +122,9 @@ export default function Perfil(props){
             
         
             <ButtonsContainer>
-                 <button >X</button>
+                 <button onClick = {clearPerson} >X</button>
                 <button onClick={() => props.addPerfil(props.profile) }>♥️</button> 
+                
             </ButtonsContainer>
 
 
