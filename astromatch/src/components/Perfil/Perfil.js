@@ -26,6 +26,7 @@ const ButtonsContainer = styled.div`
 `
 
 
+
 export default function Perfil(props){
     //vou ter q ter um estado para armazenar os perfis na api get profile to choose
     const [profile, setProfile] = useState({})
@@ -113,7 +114,7 @@ export default function Perfil(props){
     return(
         <PerfilContainer>
            
-             <UserPhoto src= {profile.photo} alt = "foto do usuário" />
+             <UserPhoto src = {profile.photo} alt = "foto do usuário" />
              <p> {profile.name}, {profile.age} anos</p>   
              
              <p> 
@@ -122,8 +123,8 @@ export default function Perfil(props){
             
         
             <ButtonsContainer>
-                 <button onClick = {clearPerson} >X</button>
-                <button onClick={() => props.addPerfil(props.profile) }>♥️</button> 
+                 <button onClick = {clearPerson} >❌</button>
+                <button onClick={() => props.addPerfil(props.profile) }> ❤️  </button> 
                 
             </ButtonsContainer>
 
