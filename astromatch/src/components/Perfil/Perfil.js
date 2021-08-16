@@ -39,9 +39,9 @@ export default function Perfil(props){
       }, []);//DidMount renderiza na tela o perfil assim que o componente é montado.
         
       // Bate na API e pega todos os perfis:
-    const getProfileToChoose = (user) => {
+    const getProfileToChoose = (aluno) => {
         axios
-        .get(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/${user} /person`)
+        .get(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/${aluno}/person`)
         .then((res)=>{
          //console.log(res.data.profile)
          setProfile(res.data.profile)
