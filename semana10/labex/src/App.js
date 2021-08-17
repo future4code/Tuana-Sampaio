@@ -6,6 +6,7 @@ import LoginPage from "./Pages/LoginPage";
 import AdminHomePage from "./Pages/AdminHomePage";
 import CreateTripPage from "./Pages/CreateTripPage"
 import TripDetailsPage from "./Pages/TripDetailsPage";
+import Router from "./routers/Router";
 
 
 
@@ -13,10 +14,10 @@ import TripDetailsPage from "./Pages/TripDetailsPage";
 
 function App() {
   return (
-    <div className="App">
-      <TripDetailsPage/>
+    
+      <Router/>
 
-    </div>
+    
   );
 }
 

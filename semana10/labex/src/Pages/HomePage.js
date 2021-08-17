@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -23,12 +24,22 @@ const Buttons = styled.div`
 
 
 function HomePage () {
+
+    const history = useHistory()
+
+    const goToTripPage = () => {
+        history.push("/listTrip")
+    }
+
+    const goToAdminHomePage = () => {
+        history.push("/AdminHome")
+    }
     return(
         <Container>
             <h1>LabeX</h1>
             <Buttons> 
-            <button>Viagens</button>
-            <button>Página de Administração</button>
+            <button onClick = {() => goToTripPage()}>Viagens</button>
+            <button onClick = {() => goToAdminHomePage()}>Página de Administração</button>
             </Buttons>
         </Container>
     )

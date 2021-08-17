@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -29,6 +30,11 @@ const Buttons = styled.div`
 
 
 function ApplicationFormPage () {
+    const history = useHistory()
+
+    const goToListTrip = () => {
+        history.goBack("/listTrip")
+    }
     return(
         <ContainerForm>
             <h1>Candidate-se a uma viagem</h1>
@@ -53,7 +59,7 @@ function ApplicationFormPage () {
             </SelectCountry>
             
             <Buttons>
-                <button>Voltar</button>
+                <button onClick = {()=>goToListTrip()}>Voltar</button>
                 <button>Enviar</button>
             </Buttons>
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios"
+import { useHistory } from "react-router-dom";
 
 
 const Container = styled.div`
@@ -23,11 +24,20 @@ const Buttons = styled.div`
     column-gap: 50px;
 `
 function ListTripsPage(params) {
+
+    const history = useHistory()
+
+    const goToApplicationPage = () => {
+        history.push("/ApplicationForm")
+    }
+    const goToHomePage = () => {
+        history.goBack("/")
+    }
     return(
         <Container>
             <Buttons>
-            <button>Voltar</button>
-            <button>Inscrever-se</button>
+            <button onClick = {()=>goToHomePage()}>Voltar</button>
+            <button onClick = {()=>goToApplicationPage()}>Inscrever-se</button>
             </Buttons>
 
             <h1>Lista de Viagens</h1>

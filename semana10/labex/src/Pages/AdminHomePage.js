@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const ContainerAdmPage = styled.div`
@@ -26,13 +27,22 @@ const NameTripList = styled.ul`
 
 
 function AdminHomePage () {
+    const history = useHistory()
+
+    const goToCreateTripPage = () => {
+        history.push("/CreateTrip")
+    }
+
+    const goToHomePage = () => {
+        history.goBack("/")
+    }
     return(
         <ContainerAdmPage>
             <h1>Página de Administração</h1>
 
             <Buttons>
-                <button>Voltar</button>
-                <button>Criar Viagem</button>
+                <button onClick = {()=>goToHomePage()}>Voltar</button>
+                <button onClick = {()=> goToCreateTripPage()}>Criar Viagem</button>
                 <button>Logout</button>
             </Buttons>
 

@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom"
 import styled from "styled-components"
 
 
@@ -26,6 +27,13 @@ const Buttons = styled.div`
 `
 
 function CreateTripPage(params) {
+    const history = useHistory()
+
+    const goToHomePage = () => {
+        history.goBack("/")
+    }
+
+   
     return(
         <ContainerTripPage>
             <h1>Criar Nova Viagem</h1>
@@ -48,7 +56,7 @@ function CreateTripPage(params) {
             </Inputs>
 
             <Buttons>
-                <button>Voltar</button>
+                <button onClick = {()=>goToHomePage()}>Voltar</button>
                 <button>Criar Viagem</button>
             </Buttons>
 
