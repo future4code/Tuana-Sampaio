@@ -22,7 +22,7 @@ const Buttons = styled.div`
 
 function TripDetailsPage() {
     const history = useHistory()
-    
+
     useEffect(()=>{
         const token = localStorage.getItem("token")
         if(token === null){
@@ -33,8 +33,8 @@ function TripDetailsPage() {
     
     useEffect(()=>{
         const token = localStorage.getItem("token")
-        axios
-        .get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trip/0uJRfOJaim4y0PVKM4eb', 
+        axios//colocar o path param na rota
+        .get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trip/[0uJRfOJaim4y0PVKM4eb]', 
         {
             headers: {
                 auth: 'token'
