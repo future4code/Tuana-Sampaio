@@ -31,15 +31,15 @@ function HomePage () {
         history.push("/listTrip")
     }
 
-    const goToAdminHomePage = () => {
-        history.push("/AdminHome")
+    const goToLoginPage = () => {
+        history.push("/login")
     }
     return(
         <Container>
             <h1>LabeX</h1>
             <Buttons> 
             <button onClick = {() => goToTripPage()}>Viagens</button>
-            <button onClick = {() => goToAdminHomePage()}>Página de Administração</button>
+            <button onClick = {() => goToLoginPage()}>Página de Administração</button>
             </Buttons>
         </Container>
     )

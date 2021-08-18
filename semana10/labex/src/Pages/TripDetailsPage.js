@@ -1,3 +1,6 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const ContainerDetailsPage = styled.div`
@@ -17,7 +20,33 @@ const Buttons = styled.div`
     column-gap: 50px;
 `
 
-function TripDetailsPage(params) {
+function TripDetailsPage() {
+    const history = useHistory()
+    
+    useEffect(()=>{
+        const token = localStorage.getItem("token")
+        if(token === null){
+            console.log("Não está logado")
+            history.push("/login")
+        }
+    })
+    
+    useEffect(()=>{
+        const token = localStorage.getItem("token")
+        axios
+        .get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trip/0uJRfOJaim4y0PVKM4eb', 
+        {
+            headers: {
+                auth: 'token'
+            }
+
+        }).then((res)=>{
+            console.log("deu certo", res.data)
+        }).catch((err)=>{
+            console.log("deu erro:", err.response)                   
+        })
+    }, [])
+
     return(
         <ContainerDetailsPage>
             <h1>Viagem - Detalhes</h1>

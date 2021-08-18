@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import styled from "styled-components"
-
+import axios from "axios"
 
 
 const ContainerTripPage = styled.div`
@@ -26,7 +27,38 @@ const Buttons = styled.div`
     column-gap: 50px;
 `
 
-function CreateTripPage(params) {
+function CreateTripPage(params) { 
+    const [trips, setTrips] = useState([])
+    const [name, setName] = useState("")
+    const [planet, setPlanet] = useState("")
+    const [date, setDate] = useState("")
+    const [description, setDescription] = useState("")
+    const [durationInDays, setdurationInDays] = useState("")
+
+    
+        const body = { 
+            name: name,
+            planet: planet,
+            date: date,
+            description: description,
+            durationInDays: durationInDays
+        }
+        
+        function CreateTrip(){
+            let newList = [...trips, {name},{planet}, {date}, {description}, {durationInDays}]
+            setTrips(newList)
+        }
+    
+    useEffect(( ) => {
+        axios
+        .post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trips", body)
+        .then((res) => 
+        console.log(res.data))
+        //setTrips(res.data.trips))
+        .catch((err)=> console.log(err.response))
+    }, [trips])
+    
+
     const history = useHistory()
 
     const goToHomePage = () => {
@@ -38,26 +70,33 @@ function CreateTripPage(params) {
         <ContainerTripPage>
             <h1>Criar Nova Viagem</h1>
             <Inputs>
-                <input type ="text" value = ""  placeholder = "Nome"/> 
+                <input type ="text" value = {name}  placeholder = "Nome" onChange= {(e) => setName(e.target.value)} /> 
                                
             </Inputs>
 
             <SelectPlanet>
                 <option>Escolha um planeta</option>
-                <option>Planeta 1</option>
-                <option>Planeta 2</option>
-                <option>Planeta 3</option>
+                <option>Mercúrio</option>
+                <option>Vênus</option>
+                <option>Terra</option>
+                <option>Marte</option>
+                <option>Júpiter</option>
+                <option>Saturno</option>
+                <option>Urano</option>
+                <option>Netuno</option>
+                <option>Plutão</option>
+
             </SelectPlanet>
 
             <Inputs>
-                <input type ="date" value = ""  placeholder = "Escolha uma data"/>  
-                <input type ="text" value = ""  placeholder = "Descrição"/> 
-                <input type ="text" value = ""  placeholder = "Duração em dias"/>               
+                <input type ="date" value = {date}  placeholder = "Escolha uma data" onChange= {(e) => setDate(e.target.value)}/>  
+                <input type ="text" value = {description}  placeholder = "Descrição" onChange= {(e) => setDescription(e.target.value)}/> 
+                <input type ="text" value = {durationInDays}  placeholder = "Duração em dias" onChange= {(e) => setdurationInDays(e.target.value)}/>               
             </Inputs>
 
             <Buttons>
                 <button onClick = {()=>goToHomePage()}>Voltar</button>
-                <button>Criar Viagem</button>
+                <button onClick = {()=>CreateTrip()} >Criar Viagem</button>
             </Buttons>
 
         </ContainerTripPage>

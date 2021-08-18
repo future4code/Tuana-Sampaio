@@ -1,11 +1,14 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import AdminHomePage from "../Pages/AdminHomePage";
 import ApplicationFormPage from "../Pages/ApplicationFormPage";
 import CreateTripPage from "../Pages/CreateTripPage";
 import HomePage from "../Pages/HomePage";
 import ListTripsPage from "../Pages/ListTripsPage";
+import LoginPage from "../Pages/LoginPage";
+import TripDetailsPage from "../Pages/TripDetailsPage";
 
 
+const isLogged = false;
 
 function Router() {
     return (
@@ -20,8 +23,16 @@ function Router() {
                 <ListTripsPage/>
             </Route>
 
+            <Route exact path = "/login">
+                <LoginPage/>
+            </Route>
+
             <Route exact path = "/AdminHome">
-                <AdminHomePage/>
+                {isLogged ? <AdminHomePage/> : <Redirect to="/login"/>}
+            </Route>
+
+            <Route exact path = "/tripDetails">
+                <TripDetailsPage/>
             </Route>
 
             <Route exact path = "/ApplicationForm">

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios"
 import { useHistory } from "react-router-dom";
+
 
 
 const Container = styled.div`
@@ -23,7 +24,30 @@ const Buttons = styled.div`
     justify-content: space-between;
     column-gap: 50px;
 `
-function ListTripsPage(params) {
+function ListTripsPage() {
+    
+    const [tripsList, setTripsList] = useState([])
+
+    useEffect(() => {
+        axios
+        .get("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trips")
+        .then((res) => 
+        //console.log(res.data.trips))
+       setTripsList(res.data.trips))
+        .catch((err)=> console.log(err.response))
+    }, [tripsList])
+    
+    
+    
+    const listTripComponents = tripsList.map((trip)=>{
+        return <CardTripList key ={trip.id}>
+        <p>Nome:{trip.name} </p>
+        <p>Descrição:{trip.description}</p>
+        <p>Planeta:{trip.planet}</p>
+        <p>Duração: {trip.durationInDays}dias</p>
+        <p>Data:{trip.date}</p>
+    </CardTripList>
+    })
 
     const history = useHistory()
 
@@ -33,6 +57,7 @@ function ListTripsPage(params) {
     const goToHomePage = () => {
         history.goBack("/")
     }
+    
     return(
         <Container>
             <Buttons>
@@ -41,13 +66,7 @@ function ListTripsPage(params) {
             </Buttons>
 
             <h1>Lista de Viagens</h1>
-            <CardTripList>
-                <p>Nome:</p>
-                <p>Descrição:</p>
-                <p>Planeta:</p>
-                <p>Duração: dias</p>
-                <p>Data:</p>
-            </CardTripList>
+            {listTripComponents}
         </Container>
     )
     
