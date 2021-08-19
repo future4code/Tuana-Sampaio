@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const ContainerDetailsPage = styled.div`
@@ -21,43 +21,58 @@ const Buttons = styled.div`
 `
 
 function TripDetailsPage() {
+    const [trip, setTrip] = useState([])
+    
+    const params = useParams()
+    //acessa o history
     const history = useHistory()
-
+   
+    //useEffect para verificar o token
     useEffect(()=>{
+        //pega o token salvo no local storage
         const token = localStorage.getItem("token")
+        // se token não existe, redireciona para a pg de login
         if(token === null){
             console.log("Não está logado")
             history.push("/login")
         }
-    })
-    
+    }, [])
+   
     useEffect(()=>{
         const token = localStorage.getItem("token")
-        axios//colocar o path param na rota
-        .get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trip/[0uJRfOJaim4y0PVKM4eb]', 
+        axios// path param na rota
+        .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trip/${params.id}`, 
         {
             headers: {
-                auth: 'token'
+                auth: token
             }
 
         }).then((res)=>{
-            console.log("deu certo", res.data)
+            console.log("deu certo", res.data.trip)
+            //setTrip(res.data.trip)
         }).catch((err)=>{
-            console.log("deu erro:", err.response)                   
+            console.log("deu erro:", err.response.data.message)                   
         })
-    }, [])
+    }, [trip])
 
+    //voltar para a página de administração
+    const goToHomePage = () => {
+        history.push("/AdminHome")
+    }
+
+    const TripList = trip.map((trips)=>{
+        return <CardTripList key = {trips.id}>
+        <p>Nome:{trips.name} </p>
+        <p>Descrição:{trips.description}</p>
+        <p>Planeta:{trips.planet}</p>
+        <p>Duração: {trips.durationInDays}dias</p>
+        <p>Data:{trips.date}</p>
+    </CardTripList>
+    })
     return(
         <ContainerDetailsPage>
             <h1>Viagem - Detalhes</h1>
 
-            <CardTripList>
-                <p>Nome:</p>
-                <p>Descrição:</p>
-                <p>Planeta:</p>
-                <p>Duração: dias</p>
-                <p>Data:</p>
-            </CardTripList>
 
             <h2>Candidatos em análise</h2>
                 <p>Sem Candidatos em análise</p>
@@ -68,9 +83,9 @@ function TripDetailsPage() {
                     <li> candidato 2 </li>
                     <li> candidato 3 </li>
                 </ul>
-
+            {TripList}
                 <Buttons>
-                    <button>Voltar</button>
+                    <button onClick = {()=> goToHomePage()}>Voltar</button>
                 </Buttons>
         </ContainerDetailsPage>
     )

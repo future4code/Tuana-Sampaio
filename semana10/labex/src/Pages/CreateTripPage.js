@@ -49,14 +49,32 @@ function CreateTripPage(params) {
             setTrips(newList)
         }
     
-    useEffect(( ) => {
+        //useEffect para verificar o token
+        useEffect(()=>{
+        //pega o token salvo no local storage
+        const token = localStorage.getItem("token")
+        // se token não existe, redireciona para a pg de login
+        if(token === null){
+            console.log("Não está logado")
+            history.push("/login")
+        }
+    }, [])
+
+    useEffect(( ) => {     
+        const token = localStorage.getItem("token")
         axios
-        .post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trips", body)
+        .post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trips", body,
+        { headers: {
+            auth: token,
+            'Content-Type' : 'application/json'
+        }
+        })
         .then((res) => 
         console.log(res.data))
-        //setTrips(res.data.trips))
-        .catch((err)=> console.log(err.response))
-    }, [trips])
+        .catch((err)=> console.log(err.response.data.message))
+    }, [])
+          
+       
     
 
     const history = useHistory()

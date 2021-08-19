@@ -8,7 +8,7 @@ import LoginPage from "../Pages/LoginPage";
 import TripDetailsPage from "../Pages/TripDetailsPage";
 
 
-const isLogged = false;
+const isLogged = true;
 
 function Router() {
     return (
@@ -31,8 +31,9 @@ function Router() {
                 {isLogged ? <AdminHomePage/> : <Redirect to="/login"/>}
             </Route>
 
-            <Route exact path = "/tripDetails">
-                <TripDetailsPage/>
+            <Route exact path = "/tripDetails/:id">
+                {isLogged ? <TripDetailsPage/> : <Redirect to="/login"/>}  
+                
             </Route>
 
             <Route exact path = "/ApplicationForm">
@@ -40,7 +41,8 @@ function Router() {
             </Route>
 
             <Route exact path = "/CreateTrip">
-                <CreateTripPage/>
+                {isLogged ? <CreateTripPage/> : <Redirect to="/login"/>} 
+                
             </Route>
             
         </Switch>
