@@ -47,6 +47,7 @@ function CreateTripPage(params) {
         function CreateTrip(){
             let newList = [...trips, {name},{planet}, {date}, {description}, {durationInDays}]
             setTrips(newList)
+            console.log("viagem criada")
         }
     
         //useEffect para verificar o token

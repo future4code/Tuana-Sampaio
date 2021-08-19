@@ -19,9 +19,15 @@ const Buttons = styled.div`
     justify-content: space-between;
     column-gap: 50px;
 `
+const CardCandidates = styled.div`
+    border: 1px solid #000;
+    width:30%;
+`
 
 function TripDetailsPage() {
     const [trip, setTrip] = useState([])
+    const [candidates, setCandidates] = useState({})
+    const [approved, setApproved] = useState([])
     
     const params = useParams()
     //acessa o history
@@ -49,41 +55,46 @@ function TripDetailsPage() {
 
         }).then((res)=>{
             console.log("deu certo", res.data.trip)
-            //setTrip(res.data.trip)
+            setTrip(res.data.trip)
+            setApproved(res.data.trip.approved)
+            setCandidates(res.data.trip.candidates)
         }).catch((err)=>{
-            console.log("deu erro:", err.response.data.message)                   
+            console.log("deu erro:", err.response)                   
         })
-    }, [trip])
+    }, [])
 
     //voltar para a página de administração
     const goToHomePage = () => {
         history.push("/AdminHome")
     }
 
-    const TripList = trip.map((trips)=>{
-        return <CardTripList key = {trips.id}>
-        <p>Nome:{trips.name} </p>
-        <p>Descrição:{trips.description}</p>
-        <p>Planeta:{trips.planet}</p>
-        <p>Duração: {trips.durationInDays}dias</p>
-        <p>Data:{trips.date}</p>
-    </CardTripList>
-    })
+
+    
+        
+    
     return(
         <ContainerDetailsPage>
             <h1>Viagem - Detalhes</h1>
-
+            
+            <CardTripList key = {trip.id}>
+                <p>Nome:{trip.name} </p>
+                <p>Descrição:{trip.description}</p>
+                <p>Planeta:{trip.planet}</p>
+                <p>Duração: {trip.durationInDays}dias</p>
+                <p>Data:{trip.date}</p>
+            </CardTripList>
 
             <h2>Candidatos em análise</h2>
-                <p>Sem Candidatos em análise</p>
+            <CardCandidates> 
+                <p> {candidates.name? candidates.name : "Não há candidatos em análise"} </p>
+             </CardCandidates>
 
                 <h2>Candidatos aprovados</h2>
                 <ul>
-                    <li> candidato 1 </li>
-                    <li> candidato 2 </li>
-                    <li> candidato 3 </li>
-                </ul>
-            {TripList}
+                    <li> {approved.name? approved.name : "Não há candidatos aprovados"}  </li>
+                    
+                    </ul>
+            
                 <Buttons>
                     <button onClick = {()=> goToHomePage()}>Voltar</button>
                 </Buttons>

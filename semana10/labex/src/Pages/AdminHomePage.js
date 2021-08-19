@@ -29,6 +29,7 @@ const NameTripList = styled.ul`
 
 function AdminHomePage (props) {
     const [tripsList, setTripsList] = useState([])
+    //const [deleteTrip, setDeleteTrip] = useState([])
     const history = useHistory()
 
     //se tiver logado permite ir para os detalhes
@@ -64,15 +65,30 @@ function AdminHomePage (props) {
     const goToDetailsPage = (id) => {
         history.push(`/tripDetails/${id}`)
     }
-    const deleteTrip = () => {
-        //axios
+    const deleteTrip = (id) => {
+        const token = localStorage.getItem("token")
+        axios
+        .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trips/${id}`, 
+        {
+            headers: {
+                auth: token,
+                'Content-Type' : 'application/json'
+            }
+
+        }).then((res)=>{
+            //console.log("deu certo", res.data)
+            
+            
+        }).catch((err)=>{
+            //console.log("deu erro:", err.response)                   
+        })
     }
 
     const listTripComponents = tripsList.map((trip)=>{
         return <NameTripList 
         key ={trip.id}> <button onClick = {()=> goToDetailsPage(trip.id)} >{trip.name}</button> 
         
-        <button /*onClick = {() => deleTrip()}*/>X</button></NameTripList> 
+        <button onClick = {() => deleteTrip(trip.id)}>X</button></NameTripList> 
                 
     })
         return(
