@@ -4,16 +4,16 @@ import styled from "styled-components"
 import axios from "axios"
 
 
-const ContainerTripPage = styled.div`
+const ContainerTripPage = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 30px;
+    column-gap: 40px;
 `
 const Inputs = styled.section`
 display: flex;
 flex-direction: column;
-width: 50%;
+//width: 50%;
 row-gap: 30px;
 `
 
@@ -28,27 +28,10 @@ const Buttons = styled.div`
 `
 
 function CreateTripPage(params) { 
-    const [trips, setTrips] = useState([])
-    const [name, setName] = useState("")
-    const [planet, setPlanet] = useState("")
-    const [date, setDate] = useState("")
-    const [description, setDescription] = useState("")
-    const [durationInDays, setdurationInDays] = useState("")
-
-    
-        const body = { 
-            name: name,
-            planet: planet,
-            date: date,
-            description: description,
-            durationInDays: durationInDays
-        }
+    const history = useHistory()
+    const [form, setForm] = useState({name:"", planet:"", date:"", description:"", durationInDays:""})
+               
         
-        function CreateTrip(){
-            let newList = [...trips, {name},{planet}, {date}, {description}, {durationInDays}]
-            setTrips(newList)
-            console.log("viagem criada")
-        }
     
         //useEffect para verificar o token
         useEffect(()=>{
@@ -59,26 +42,33 @@ function CreateTripPage(params) {
             console.log("Não está logado")
             history.push("/login")
         }
-    }, [])
-
-    useEffect(( ) => {     
+    }, [form])
+    
+    function CreateTrip(event){
+        event.preventDefault()
         const token = localStorage.getItem("token")
         axios
-        .post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trips", body,
-        { headers: {
+        .post("https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trips", form,
+        { 
+            headers: {
             auth: token,
             'Content-Type' : 'application/json'
         }
         })
         .then((res) => 
         console.log(res.data))
-        .catch((err)=> console.log(err.response.data.message))
-    }, [])
-          
-       
+        .catch((err)=> console.log(err.response))
+
+    }
+
+    
+     // função onChange unificada     
+    const onChange = (event) => {
+        setForm({...form, [event.target.name]: event.target.value})
+    }
     
 
-    const history = useHistory()
+    
 
     const goToHomePage = () => {
         history.goBack("/")
@@ -87,35 +77,51 @@ function CreateTripPage(params) {
    
     return(
         <ContainerTripPage>
+             <button onClick = {()=>goToHomePage()}>Voltar</button>
             <h1>Criar Nova Viagem</h1>
-            <Inputs>
-                <input type ="text" value = {name}  placeholder = "Nome" onChange= {(e) => setName(e.target.value)} /> 
-                               
-            </Inputs>
+            
+            <form onSubmit = {CreateTrip}> 
+            
+            
+                <input
+                type ="text" required
+                name = "name" 
+                pattern = {"^.{5,} "}
+                title = {"Deve conter no mínimo 5 letras"}
+                value = {form.name}  
+                placeholder = "Nome" 
+                onChange= {onChange} /> 
+                                  
+           
+
+            
 
             <SelectPlanet>
-                <option>Escolha um planeta</option>
-                <option>Mercúrio</option>
-                <option>Vênus</option>
-                <option>Terra</option>
-                <option>Marte</option>
-                <option>Júpiter</option>
-                <option>Saturno</option>
-                <option>Urano</option>
-                <option>Netuno</option>
-                <option>Plutão</option>
+                <option name = "planet" value = {form.planet}>Escolha um planeta</option>
+                <option value = "Mercúrio">Mercúrio</option>
+                <option value = "Vênus">Vênus</option>
+                <option value = "Terra">Terra</option>
+                <option value = "Marte">Marte</option>
+                <option value = "Júpiter">Júpiter</option>
+                <option value = "Saturno">Saturno</option>
+                <option value = "Urano">Urano</option>
+                <option value = "Netuno">Netuno</option>
+                <option value = "Plutão">Plutão</option>
 
             </SelectPlanet>
-
-            <Inputs>
-                <input type ="date" value = {date}  placeholder = "Escolha uma data" onChange= {(e) => setDate(e.target.value)}/>  
-                <input type ="text" value = {description}  placeholder = "Descrição" onChange= {(e) => setDescription(e.target.value)}/> 
-                <input type ="text" value = {durationInDays}  placeholder = "Duração em dias" onChange= {(e) => setdurationInDays(e.target.value)}/>               
-            </Inputs>
+ 
+            
+                <Inputs>
+                    <input name = "date" type ="date" required value = {form.date}  placeholder = "Escolha uma data" onChange= {onChange}/>  
+                    <input name = "description" type ="text" required pattern = {"^.{50, } "} title = {"Seu descrição deve conter no mínimo 50 caracteres"} value = {form.description}  placeholder = "Descrição" onChange= {onChange}/> 
+                    <input name = "durationInDays" type ="text" required pattern = {"^.{50, } "} title = {"Mínimo de 50 dias"} value = {form.durationInDays}  placeholder = "Duração em dias" onChange= {onChange}/>               
+                </Inputs>
+                <button>Criar Viagem</button>
+            </form>
 
             <Buttons>
-                <button onClick = {()=>goToHomePage()}>Voltar</button>
-                <button onClick = {()=>CreateTrip()} >Criar Viagem</button>
+               
+                
             </Buttons>
 
         </ContainerTripPage>

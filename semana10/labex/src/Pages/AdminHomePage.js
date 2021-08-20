@@ -29,7 +29,7 @@ const NameTripList = styled.ul`
 
 function AdminHomePage (props) {
     const [tripsList, setTripsList] = useState([])
-    //const [deleteTrip, setDeleteTrip] = useState([])
+
     const history = useHistory()
 
     //se tiver logado permite ir para os detalhes

@@ -16,23 +16,26 @@ const CardTripList = styled.ul`
 const Buttons = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    column-gap: 50px;
+    justify-content: center;
+    column-gap: 60px;
 `
-const CardCandidates = styled.div`
+const CardCandidates = styled.ul`
     border: 1px solid #000;
-    width:30%;
+    width:90%;
+    padding: 20px;
+    margin-right:50px;
 `
 
 function TripDetailsPage() {
     const [trip, setTrip] = useState([])
-    const [candidates, setCandidates] = useState({})
+    const [candidates, setCandidates] = useState([])
     const [approved, setApproved] = useState([])
     
     const params = useParams()
     //acessa o history
     const history = useHistory()
-   
+
+       
     //useEffect para verificar o token
     useEffect(()=>{
         //pega o token salvo no local storage
@@ -46,7 +49,7 @@ function TripDetailsPage() {
    
     useEffect(()=>{
         const token = localStorage.getItem("token")
-        axios// path param na rota
+        axios// path param na rota. retorna os detalhes e os candidatos de uma viagem específica.
         .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trip/${params.id}`, 
         {
             headers: {
@@ -63,12 +66,38 @@ function TripDetailsPage() {
         })
     }, [])
 
+
+    const aproveCandidate = () => {   
+    
+        const token = localStorage.getItem("token")
+
+        const body = { 
+
+            approve: true
+        }
+
+        axios// decidir a aprovação ou não de um candidato para uma viagem. descobrir como pegar o id do candidato
+        .put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/Tuana-Sampaio-Lovelace/trips/${params.id}/candidates/:candidateId/decide`, body, 
+        {
+            headers: {
+                auth: token,
+                'Content-Type' : 'application/json'
+            }
+
+        }).then((res)=>{
+            console.log("deu certo", res.data.trip)
+            setApproved(res.data.trip.approved)
+        }).catch((err)=>{
+            console.log("deu erro:", err.response)                   
+        })
+    }
+
     //voltar para a página de administração
     const goToHomePage = () => {
         history.push("/AdminHome")
     }
 
-
+    
     
         
     
@@ -85,13 +114,38 @@ function TripDetailsPage() {
             </CardTripList>
 
             <h2>Candidatos em análise</h2>
-            <CardCandidates> 
-                <p> {candidates.name? candidates.name : "Não há candidatos em análise"} </p>
-             </CardCandidates>
+             
+                <p> {candidates? 
+                    candidates.map((candidate)=>{
+                        return<CardCandidates key = {candidate.id}>  
+                           <p>Nome: {candidate.name} </p> 
+                           <p>Profissão: {candidate.profession} </p> 
+                           <p>Idade: {candidate.age} </p> 
+                           <p>País: {candidate.country} </p> 
+                            <p>Texto de candidatura: {candidate.applicationText}</p> 
+                            
+                            <Buttons>
+                            <button onClick = {()=> aproveCandidate()}>Aprovar</button>
+                            <button>Reprovar</button>
+                            </Buttons>
+                            
+                            </CardCandidates>  
+                        }) 
+                    : "Não há candidatos em análise"} </p>
+                    
+             
 
                 <h2>Candidatos aprovados</h2>
                 <ul>
-                    <li> {approved.name? approved.name : "Não há candidatos aprovados"}  </li>
+                    <li> {approved? 
+                         approved.map((approved)=>{
+                             return <ul> 
+                                        <li>
+                                            {approved.name}
+                                        </li>
+                                    </ul> 
+                             })
+                         : "Não há candidatos aprovados"} </li>
                     
                     </ul>
             
