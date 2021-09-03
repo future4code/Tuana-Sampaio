@@ -1,26 +1,40 @@
 import React from "react"
-import { InputsContainer } from "./styled"
+import { InputsContainer} from "./styled"
 import { TextField } from "@material-ui/core"
 import useForm from "../../hooks/useForm"
 import { Button } from "@material-ui/core"
-import { login } from "../../services/user"
+import { signUp } from "../../services/user"
 import { useHistory } from "react-router"
 
 
-const LoginForm = () => {
 
-    const [form, onChange, clear] = useForm({email: "", password: ""})
+
+const SignUpForm = () => {
     const history = useHistory()
+    const [form, onChange, clear] = useForm({name: "", email: "", password: ""})
+    
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        login(form, clear, history)
+        signUp(form, clear, history)
     }
 
     
     return ( 
             <InputsContainer>
-                <form onSubmit = {onSubmitForm}>
+                    <form onSubmit = {onSubmitForm}>
+                    <TextField //form do material
+                        name = {"name"}
+                        value = {form.name}
+                        onChange = {onChange}
+                        label = {"nome"}
+                        variant = {"outlined"}
+                        fullWidth
+                        margin = {"normal"} 
+                        required
+                        autoFocus
+                    />
+                
                     <TextField //form do material
                         name = {"email"}
                         value = {form.email}
@@ -49,10 +63,10 @@ const LoginForm = () => {
                         fullWidth
                         variant = {"contained"}
                         color = {"primary"}
-                        >Entrar</Button>
+                        >Fazer Cadastro</Button>
                 </form>
             </InputsContainer>
     )
 }
 
-export default LoginForm
+export default SignUpForm
