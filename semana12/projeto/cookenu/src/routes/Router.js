@@ -1,6 +1,5 @@
 import React from "react"
-import { BrowserRouter, Switch, Route } from "react-router-dom"
-import Header from "../components/Header/Header"
+import {Switch, Route } from "react-router-dom"
 import AddRecipesPage from "../pages/AddRecipesPage/AddRecipesPage"
 import Error from "../pages/Error/Error"
 import LoginPage from "../pages/LoginPage/LoginPage"
@@ -10,16 +9,14 @@ import SignUpPage from "../pages/SignUpPage/SignUpPage"
 
 
 
-const Router = () => {
+const Router = ({rightButtonText, setRightButtonText}) => {
     return(
-        <BrowserRouter>
-            <Header/>
             <Switch>
                 <Route exact path = "/Login">
-                    <LoginPage/>
+                    <LoginPage rightButtonText = {rightButtonText} setRightButtonText={setRightButtonText}/>
                 </Route>
                 <Route exact path = "/cadastro">
-                    <SignUpPage/>
+                    <SignUpPage rightButtonText = {rightButtonText} setRightButtonText={setRightButtonText}/>
                 </Route>
                 <Route exact path = "/" >
                     <RecipesListPage/>
@@ -34,7 +31,7 @@ const Router = () => {
                     <Error/>
                 </Route>
             </Switch>
-        </BrowserRouter>
+        
     )
 }
 

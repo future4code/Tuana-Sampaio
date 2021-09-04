@@ -7,14 +7,14 @@ import { login } from "../../services/user"
 import { useHistory } from "react-router"
 
 
-const LoginForm = () => {
+const LoginForm = ({rightButtonText, setRightButtonText}) => {
 
     const [form, onChange, clear] = useForm({email: "", password: ""})
     const history = useHistory()
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        login(form, clear, history)
+        login(form, clear, history,setRightButtonText)
     }
 
     

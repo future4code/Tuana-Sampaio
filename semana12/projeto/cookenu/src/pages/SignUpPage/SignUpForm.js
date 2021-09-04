@@ -9,14 +9,14 @@ import { useHistory } from "react-router"
 
 
 
-const SignUpForm = () => {
+const SignUpForm = ({rightButtonText, setRightButtonText}) => {
     const history = useHistory()
     const [form, onChange, clear] = useForm({name: "", email: "", password: ""})
     
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        signUp(form, clear, history)
+        signUp(form, clear, history, setRightButtonText)
     }
 
     
