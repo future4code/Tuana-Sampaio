@@ -1,0 +1,12 @@
+{
+  "name": "exercicio1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "starts" : "tsc && node ./build/index.js"
+      
+  },
+  "author": "",
+  "license": "ISC"
+}
