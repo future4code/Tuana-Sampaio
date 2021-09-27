@@ -9,8 +9,13 @@ app.use(cors())
 
 //Endpoint 1 - Buscar todos os países
 
-app.get('/countries/all', (req: Request, res: Response) => {
-   res.status(200).send(countries)
+app.get('/countries', (req: Request, res: Response)=>{
+   try{
+      const name: string = req.query.name as string
+      const country: country | undefined = countries.filter(country)=> country
+   }catch(error){
+
+   }
 })
 
 //servidor
