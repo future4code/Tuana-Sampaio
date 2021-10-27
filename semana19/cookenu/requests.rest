@@ -1,0 +1,44 @@
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "babe",
+    "email": "babes@gmail.com",
+    "password": "123456"
+}
+
+###
+# @name login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "ana@gmail.com",
+    "password": "12345"
+}
+
+###
+# @name getProfile
+GET http://localhost:3003/users/profile
+Authorization: {{login.response.body.token}}
+
+###
+
+GET http://localhost:3003/users/cc96f8da-3d24-491c-8755-8e677675138b/profile
+Authorization: {{login.response.body.token}}
+
+###
+POST http://localhost:3003/recipe
+Content-Type: application/json
+Authorization: {{login.response.body.token}}
+
+{
+    "title": "strogonoff de carne",
+    "description": "carne ao molho especial, acompanhando de arroz branco e batata palha"
+    
+}
+
+###
+GET http://localhost:3003/recipe/2a2a6a70-3dec-4f3e-8287-627b0609f5a4
+Authorization: {{login.response.body.token}}
+
